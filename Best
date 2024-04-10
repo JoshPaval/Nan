@@ -1,0 +1,97 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class LoginRegistroPanel extends JFrame {
+    private JPanel loginPanel;
+    private JPanel registroPanel;
+    private JTextField usuarioField;
+    private JPasswordField contrasenaField;
+    private JTextField nombresField;
+    private JTextField apellidosField;
+    private JTextField correoField;
+    private JPasswordField contrasenaRegistroField;
+    private JPasswordField confirmarContrasenaField;
+    private JCheckBox aceptarCheckBox;
+
+    public LoginRegistroPanel() {
+        // Configuración del frame principal
+        setTitle("Login y Registro");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(400, 300);
+        setLayout(new GridLayout(2, 1));
+
+        // Creación del panel de login
+        loginPanel = new JPanel(new GridLayout(3, 2));
+        JLabel usuarioLabel = new JLabel("Usuario:");
+        usuarioField = new JTextField();
+        JLabel contrasenaLabel = new JLabel("Contraseña:");
+        contrasenaField = new JPasswordField();
+        JButton loginButton = new JButton("Iniciar sesión");
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Error: Credenciales incorrectas", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+        loginPanel.add(usuarioLabel);
+        loginPanel.add(usuarioField);
+        loginPanel.add(contrasenaLabel);
+        loginPanel.add(contrasenaField);
+        loginPanel.add(loginButton);
+
+        // Creación del panel de registro
+        registroPanel = new JPanel(new GridLayout(6, 2));
+        JLabel nombresLabel = new JLabel("Nombres:");
+        nombresField = new JTextField();
+        JLabel apellidosLabel = new JLabel("Apellidos:");
+        apellidosField = new JTextField();
+        JLabel correoLabel = new JLabel("Correo electrónico:");
+        correoField = new JTextField();
+        JLabel contrasenaRegistroLabel = new JLabel("Contraseña:");
+        contrasenaRegistroField = new JPasswordField();
+        JLabel confirmarContrasenaLabel = new JLabel("Confirmar contraseña:");
+        confirmarContrasenaField = new JPasswordField();
+        aceptarCheckBox = new JCheckBox("Aceptar términos y condiciones");
+        JButton registroButton = new JButton("Registrarse");
+        registroButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (String.valueOf(contrasenaRegistroField.getPassword()).equals(String.valueOf(confirmarContrasenaField.getPassword())) && aceptarCheckBox.isSelected()) {
+                    JOptionPane.showMessageDialog(null, "Registro exitoso", "Success", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error: Las contraseñas no coinciden o los términos y condiciones no han sido aceptados", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        registroPanel.add(nombresLabel);
+        registroPanel.add(nombresField);
+        registroPanel.add(apellidosLabel);
+        registroPanel.add(apellidosField);
+        registroPanel.add(correoLabel);
+        registroPanel.add(correoField);
+        registroPanel.add(contrasenaRegistroLabel);
+        registroPanel.add(contrasenaRegistroField);
+        registroPanel.add(confirmarContrasenaLabel);
+        registroPanel.add(confirmarContrasenaField);
+        registroPanel.add(aceptarCheckBox);
+        registroPanel.add(registroButton);
+
+        // Agregar los paneles al frame principal
+        add(loginPanel);
+        add(registroPanel);
+
+        // Mostrar el frame
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new LoginRegistroPanel();
+            }
+        });
+    }
+}
